@@ -48,7 +48,7 @@ def categorize_salary(employee: pd.DataFrame) -> pd.DataFrame:
     return employee
 
 
-def information_by_department(employee:pd.DataFrame, department_name: str, fx: str) -> int:
+def information_by_department(employee: pd.DataFrame, department_name: str, fx: str) -> int:
 
     if department_name.lower() == 'hr' or department_name.lower() == 'it' or department_name.lower() == 'sales' or\
        department_name.lower() == 'accounting':
@@ -82,7 +82,7 @@ def information_by_department(employee:pd.DataFrame, department_name: str, fx: s
     return employee_new.loc[y]
 
 
-def information_compared_to_department_avg(employee:pd.DataFrame, department_name: str, employee_id: int) -> str:
+def information_compared_to_department_avg(employee: pd.DataFrame, department_name: str, employee_id: int) -> str:
 
     dept_avg_salary = information_by_department(employee, department_name, "average")
     dept_avg_salary = dept_avg_salary
@@ -103,4 +103,3 @@ def information_compared_to_department_avg(employee:pd.DataFrame, department_nam
         return str(x_salary) + " is higher than the average salary of " + str(dept_avg_salary)
     else:
         return "this is not a valid salary"
-
