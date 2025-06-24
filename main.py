@@ -1,4 +1,4 @@
-import samplecodefunctions as fx
+import employee_functions as fx
 import pandas as pd
 
 print("Hi, welcome. Select # based on function you would like to perform")

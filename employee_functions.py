@@ -43,7 +43,7 @@ def categorize_salary(employee: pd.DataFrame) -> pd.DataFrame:
         else:
             return "high"
 
-    employee["salary level"] = employee["salary"].apply(salarylabel)
+    employee["salary level"] = employee["salary"].apply(salary_label)
 
     return employee
 
@@ -53,20 +53,21 @@ def information_by_department(employee:pd.DataFrame, department_name: str, fx: s
     if department_name.lower() == 'hr' or department_name.lower() == 'it' or department_name.lower() == 'sales' or\
        department_name.lower() == 'accounting':
 
-        #print(departments)
+        # print(departments)
+
         x = departments[departments['department'] == department_name]
-        #print(x)
+        # print(x)
         y = int(x['id'].iloc[0])
-        #print(y)
+        # print(y)
 
     else:
         return -1
 
     fx = fx.lower()
     if fx == 'minimum':
-        #print("made it")
+        # print("made it")
         employee_new = employee.groupby('department')["salary"].min()
-        #print(employee_new)
+        # print(employee_new)
     elif fx == 'maximum':
         employee_new = employee.groupby('department')["salary"].max()
         print(employee_new)
@@ -85,9 +86,9 @@ def information_compared_to_department_avg(employee:pd.DataFrame, department_nam
 
     dept_avg_salary = information_by_department(employee, department_name, "average")
     dept_avg_salary = dept_avg_salary
-    #print(dept_avg)
+    # print(dept_avg)
 
-    #print(employee)
+    # print(employee)
     # print(departments)
     x = employee[employee['id'] == int(employee_id)]
     print(x)
