@@ -94,7 +94,7 @@ def department_ids(employee: pd.DataFrame, department_name: str) -> pd.DataFrame
         # this id column is the DEPARTMENT #
         y = int(x['id'].iloc[0])
         # print(y)
-        print(employee[employee['department'] == y])
+        # print(employee[employee['department'] == y])
         return employee[employee['department'] == y]
     else:
         return pd.DataFrame()

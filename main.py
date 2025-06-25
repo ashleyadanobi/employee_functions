@@ -19,7 +19,7 @@ if int(fx_number) == 1:
 
 if int(fx_number) == 2:
     employee = fx.categorize_salary(employee('employee1.csv'))
-    print(fx.categorize_salary(employee('employee1.csv')))
+    print(fx.categorize_salary(pd.read_csv('employee1.csv')))
 
 if int(fx_number) == 3:
     # print(fx.information_by_department(pd.read_csv('employee1.csv'), 'HR', 'Minimum'))
