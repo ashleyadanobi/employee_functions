@@ -45,11 +45,13 @@ def categorize_salary(employee: pd.DataFrame) -> pd.DataFrame:
 
     employee["salary level"] = employee["salary"].apply(salary_label)
 
+    print(employee)
     return employee
 
 
 def information_by_department(employee: pd.DataFrame, department_name: str, fx: str) -> int:
 
+    # input must match these values - not case sensitive
     if department_name.lower() == 'hr' or department_name.lower() == 'it' or department_name.lower() == 'sales' or\
        department_name.lower() == 'accounting':
 
@@ -63,6 +65,7 @@ def information_by_department(employee: pd.DataFrame, department_name: str, fx: 
     else:
         return -1
 
+    # Function that will be taken based on user input, not case sensitive
     fx = fx.lower()
     if fx == 'minimum':
         # print("made it")
@@ -70,30 +73,68 @@ def information_by_department(employee: pd.DataFrame, department_name: str, fx: 
         # print(employee_new)
     elif fx == 'maximum':
         employee_new = employee.groupby('department')["salary"].max()
-        print(employee_new)
+        # print(employee_new)
     elif fx == 'median':
         employee_new = employee.groupby('department')["salary"].median()
     elif fx == 'average':
         employee_new = employee.groupby('department')["salary"].mean()
-        print(employee_new)
+        # print(employee_new)
     else:
         return -1
 
     return employee_new.loc[y]
 
 
-def information_compared_to_department_avg(employee: pd.DataFrame, department_name: str, employee_id: int) -> str:
+def department_ids(employee: pd.DataFrame, department_name: str) -> pd.DataFrame:
+    # finds department in department table
+    if departments['department'].isin([department_name]).any():
+        x = departments[departments['department'] == department_name]
+        # print(x)
 
+        # this id column is the DEPARTMENT #
+        y = int(x['id'].iloc[0])
+        # print(y)
+        print(employee[employee['department'] == y])
+        return employee[employee['department'] == y]
+    else:
+        return pd.DataFrame()
+
+
+def information_compared_to_department_avg(employee: pd.DataFrame, department_name: str, employee_id: str) -> str:
+
+    # determine ids and related values that match user input
+    department_ids_df = department_ids(employee, department_name)
+
+    # user input for department was wrong
+    if department_ids_df.empty:
+        return "Department is not valid"
+
+    # checking if user input is in table and overriding old table
+    department_ids_df = department_ids_df[department_ids_df['id'] == int(employee_id)]
+    #print(department_ids_df)
+
+    # user input for id was wrong
+    if department_ids_df.empty:
+        return "Employee is not in specified department"
+
+    # print(department_ids_df['id'])
+
+    # calculating department average for user input
     dept_avg_salary = information_by_department(employee, department_name, "average")
-    dept_avg_salary = dept_avg_salary
-    # print(dept_avg)
+    # print(dept_avg_salary)
 
-    # print(employee)
-    # print(departments)
+    # grabbing salary of user input (could be deleted)
     x = employee[employee['id'] == int(employee_id)]
-    print(x)
-    x_salary = int(x['salary'].iloc[0])
 
+    # print("Row that was called - ")
+    # print(x)
+
+    # same here
+    x_salary = int(x['salary'].iloc[0])
+    # print("Salary Is - ")
+    # print(x_salary)
+
+    # comparing salary of input id employee to department average
     if 0 < x_salary < dept_avg_salary:
         return str(x_salary) + " is lower than the average salary of " + str(dept_avg_salary)
     elif x_salary == dept_avg_salary:
