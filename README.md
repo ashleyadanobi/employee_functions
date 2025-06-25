@@ -22,7 +22,7 @@ This function finds either a minimum, maximum, median, or average value within a
 ### def information_compared_to_department_avg(employee: pd.DataFrame, department_name: str, employee_id: int) -> str
 This function finds whether an individual makes more or less then a particular department's average salary. 
 
-It returns error if the input for department name or id is invalid. department_name must be one of the 4 mentioned in the console, and id must correlate with employee IDs in the department indicated.
+It returns an error message if the input for department name or id is invalid. department_name must be one of the 4 mentioned in the console, and id must correlate with employee IDs in the department indicated.
 
 
 
