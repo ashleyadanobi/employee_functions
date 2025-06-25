@@ -19,10 +19,10 @@ This change is irrelevant to other functions currently as I continue to call the
 This function finds either a minimum, maximum, median, or average value within a department. The kind of value and department are user inputs.
 
 
-### def information_by_department(employee:pd.DataFrame, department_name: str, fx: str) -> int
+### def information_compared_to_department_avg(employee: pd.DataFrame, department_name: str, employee_id: int) -> str
 This function finds whether an individual makes more or less then a particular department's average salary. 
 
-Currently, you can compare salary from an id a that is NOT linked to the department b that is called, but my next changes are to: add function to determine ids within a department and return -1 for id values outside the called department
+It returns an error message if the input for department name or id is invalid. department_name must be one of the 4 mentioned in the console, and id must correlate with employee IDs in the department indicated.
 
 
 
